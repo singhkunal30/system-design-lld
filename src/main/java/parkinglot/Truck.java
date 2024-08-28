@@ -1,4 +1,4 @@
-package com.practice.system_design_lld.parkinglot;
+package parkinglot;
 
 public class Truck extends Vehicle {
 

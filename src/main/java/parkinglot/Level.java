@@ -1,4 +1,4 @@
-package com.practice.system_design_lld.parkinglot;
+package parkinglot;
 
 import java.util.ArrayList;
 import java.util.List;
