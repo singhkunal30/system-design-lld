@@ -1,45 +1,62 @@
 package parkinglot;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+
+import parkinglot.model.Address;
+import parkinglot.parkingspots.ParkingSpot;
+import parkinglot.utils.Entrance;
+import parkinglot.utils.Exit;
+import parkinglot.utils.ParkingRate;
+import parkinglot.utils.ParkingTicket;
+import parkinglot.vehicle.Vehicle;
 
 public class ParkingLot {
-	
-	//Singleton Pattern for parkinglot
-	private static ParkingLot instance;
-	private final List<Level> levels;
-	
+	private int id;
+	private String name;
+	private Address address;
+	private ParkingRate parkingRate;
+
+	private HashMap<String, Entrance> entrance;
+	private HashMap<String, Exit> exit;
+
+	// Create a hashmap that identifies all currently generated tickets using their
+	// ticket number
+	private HashMap<String, ParkingTicket> tickets;
+
+	// The ParkingLot is a singleton class that ensures it will have only one active
+	// instance at a time
+	// Both the Entrance and Exit classes use this class to create and close parking
+	// tickets
+	private static ParkingLot parkingLot = null;
+
+	// Created a private constructor to add a restriction (due to Singleton)
 	private ParkingLot() {
-		this.levels = new ArrayList<Level>();
-	}
-	
-	public static synchronized ParkingLot getInstance() {
-		if(instance == null)instance = new ParkingLot();
-		return instance;
-	}
-	
-	public void addLevel(Level level) {
-		levels.add(level);
-	}
-	
-	public boolean parkVehicle(Vehicle vehicle) {
-		for(Level level: levels) {
-			if(level.parkVehicle(vehicle)) return true;
-		}
-		return false;
-	}
-	
-	public boolean unparkVehicle(Vehicle vehicle) {
-		for(Level level: levels) {
-			if(level.unparkVehicle(vehicle)) return true;
-		}
-		return false;
-	}
-	
-	public void displayAvailability() {
-		for(Level level: levels) {
-			level.displayAvailability();
-		}
+		// Call the name, address and parking_rate
+		// Create initial entrance and exit hashmaps respectively
 	}
 
+	// Created a static method to access the singleton instance of ParkingLot
+	public static ParkingLot getInstance() {
+		if (parkingLot == null) {
+			parkingLot = new ParkingLot();
+		}
+		return parkingLot;
+	}
+
+	public boolean addEntrance(Entrance entrance) {
+		return false;
+	}
+
+	public boolean addExit(Exit exit) {
+		return false;
+	}
+
+	// This function allows parking tickets to be available at multiple entrances
+	public ParkingTicket getParkingTicket(Vehicle vehicle) {
+		return new ParkingTicket();
+	}
+
+	public boolean isFull(ParkingSpot type) {
+		return false;
+	}
 }
